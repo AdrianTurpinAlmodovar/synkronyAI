@@ -10,8 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $icon = $conn->real_escape_string($_POST['icon']);
     $title = $conn->real_escape_string($_POST['title']);
     $desc = $conn->real_escape_string($_POST['description']);
+    $resumen = $conn->real_escape_string($_POST['resumen']); // NUEVO CAMPO CAPTURADO
     
-    // NUEVOS CAMPOS
+    // RESTO DE CAMPOS
     $description_extended = $conn->real_escape_string($_POST['description_extended']);
     $video = $conn->real_escape_string($_POST['video_url']);
     $categoria = $conn->real_escape_string($_POST['categoria']);
@@ -43,14 +44,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    $stmt = $conn->prepare("INSERT INTO services (icon, title, description, description_extended, image_url, video_url, categoria, tipo, tiempo_implementacion, caracteristicas_principales) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssssss", $icon, $title, $desc, $description_extended, $image_url, $video, $categoria, $tipo, $tiempo_implementacion, $caracteristicas_principales);
+    // SQL ACTUALIZADO CON EL CAMPO 'resumen' (11 interrogantes en total)
+    $stmt = $conn->prepare("INSERT INTO services (icon, title, description, description_extended, resumen, image_url, video_url, categoria, tipo, tiempo_implementacion, caracteristicas_principales) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+    // BIND_PARAM ACTUALIZADO (11 's' y añadida la variable $resumen en su posición correcta)
+    $stmt->bind_param("sssssssssss", $icon, $title, $desc, $description_extended, $resumen, $image_url, $video, $categoria, $tipo, $tiempo_implementacion, $caracteristicas_principales);
     
     if ($stmt->execute()) {
         header("Location: admin_services.php?status=success");
         exit;
     } else {
-        display_error("Error al guardar el servicio.");
+        display_error("Error al guardar el servicio: " . $conn->error);
     }
     $stmt->close();
 }
@@ -65,8 +69,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .admin-form-container { max-width: 500px; margin: 40px auto; background: #14141d; padding: 30px; border-radius: 12px; border: 1px solid #333; }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; color: #0077FF; font-weight: bold; }
-        input, textarea { width: 100%; padding: 12px; background: #0A0A10; border: 1px solid #333; color: white; border-radius: 6px; box-sizing: border-box; }
-        .btn-submit { width: 100%; padding: 14px; background: #9F40FF; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        input, textarea, select { width: 100%; padding: 12px; background: #0A0A10; border: 1px solid #333; color: white; border-radius: 6px; box-sizing: border-box; }
+        .btn-submit { width: 100%; padding: 14px; background: #9F40FF; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        .btn-submit:hover { background: #b066ff; }
     </style>
 </head>
 <body>
@@ -86,27 +91,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <textarea name="description" rows="3" placeholder="Descripción breve que aparecerá en listados..."></textarea>
             </div>
             
-            <!-- NUEVOS CAMPOS -->
+            <div class="form-group">
+                <label>Resumen</label>
+                <textarea name="resumen" rows="3" placeholder="Resumen rápido del servicio..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Descripción Extendida</label>
+                <textarea name="description_extended" rows="4" placeholder="Descripción detallada del servicio, características, beneficios, etc..."></textarea>
+            </div>
+            
             <div class="form-group">
                 <label>Subir Imagen (Captura de pantalla)</label>
                 <input type="file" name="image_upload" accept="image/jpeg,image/png,image/gif,image/webp">
-                <small style="color: #666;">Formatos: JPG, PNG, GIF, WebP. Máximo 2MB. Si se añade, se mostrará como imagen principal del servicio.</small>
+                <small style="color: #666; display: block; margin-top: 5px;">Formatos: JPG, PNG, GIF, WebP. Máximo 2MB. Si se añade, se mostrará como imagen principal del servicio.</small>
             </div>
             
-            <div class="form-group">
-                <label>Descripción Extendida (Opcional)</label>
-                <textarea name="description_extended" rows="4" placeholder="Descripción detallada del servicio, características, beneficios, etc..."></textarea>
-                <small style="color: #666;">Si se añade, esta descripción reemplazará a la descripción corta.</small>
-            </div>
-            
-            <!-- CAMPO DE VIDEO EXISTENTE -->
             <div class="form-group">
                 <label>URL del Video Demo (YouTube/Vimeo)</label>
                 <input type="url" name="video_url" placeholder="https://www.youtube.com/embed/XXXXXX">
-                <small style="color: #666;">Usa el enlace de "Insertar" (embed) para que funcione en el modal.</small>
+                <small style="color: #666; display: block; margin-top: 5px;">Usa el enlace de "Insertar" (embed) para que funcione en el modal.</small>
             </div>
             
-            <!-- NUEVOS CAMPOS DINÁMICOS -->
             <div class="form-group">
                 <label>Categoría</label>
                 <select name="categoria" required>
@@ -136,11 +142,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label>Características Principales (JSON)</label>
                 <textarea name="caracteristicas_principales" rows="3" placeholder='["Característica 1", "Característica 2", "Característica 3"]'>["Implementación rápida", "Soporte técnico", "Analytics detallados"]</textarea>
-                <small style="color: #666;">Formato JSON: ["Característica 1", "Característica 2", "Característica 3"]</small>
+                <small style="color: #666; display: block; margin-top: 5px;">Formato JSON: ["Característica 1", "Característica 2", "Característica 3"]</small>
             </div>
             
             <button type="submit" class="btn-submit">Guardar Automatización</button>
-            <p style="text-align:center;"><a href="admin_services.php" style="color:#888; text-decoration: none;">Cancelar</a></p>
+            <p style="text-align:center; margin-top: 15px;"><a href="admin_services.php" style="color:#888; text-decoration: none;">Cancelar</a></p>
         </form>
     </div>
 </body>
