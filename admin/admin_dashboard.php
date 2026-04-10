@@ -37,6 +37,7 @@ check_admin_access();
         <nav>
             <a href="/" style="color: #e4d50d; margin-right: 20px; text-decoration: none; font-weight: bold;">🏠 Volver al Home</a>
             <a href="../dashboard/dashboard_normal.php" style="color: #0077FF; margin-right: 20px; text-decoration: none; font-weight: bold;">👁️ Vista Cliente</a>
+            <a href="../documentacion/" style="color: #00ff99; margin-right: 20px; text-decoration: none; font-weight: bold;">📚 Documentación</a>
             <a href="../logout.php" style="color: #FF6B6B; text-decoration: none; font-weight: bold;">Cerrar Sesión</a>
         </nav>
     </header>
