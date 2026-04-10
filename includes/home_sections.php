@@ -194,41 +194,68 @@ if (!function_exists('generateSlug')) {
 <!-- METODOLOGÍA -->
 <section class="rich-section padding-y-lg">
     <div class="section-header">
-        <h2>Metodología de Implementación</h2>
+        <h2 style="font-size: 2.5rem;">Metodología de Implementación</h2>
         <p>Proceso estructurado para auditar e integrar soluciones tecnológicas.</p>
     </div>
     <div class="timeline-container">
 
         <div class="timeline-step">
-            <div class="step-number" style="border-color: #9F40FF;">1</div>
-            <span class="step-badge bg-purple-light text-purple">Fase 1</span>
+            <div class="step-number" style="border-color: #0056b3; background: #004494; color: white;">1</div>
+            <span class="step-badge bg-blue-light text-blue">Fase 1</span>
             <h3 class="step-title">Evaluación de Necesidades</h3>
-            <p class="step-desc">Análisis de los procedimientos operativos actuales para documentar flujos e identificar tareas repetitivas.</p>
+            <p class="step-desc">Analizamos tus procesos actuales sin costo e identificamos las áreas donde la automatización puede tener más impacto.</p>
             <ul class="step-list">
-                <li>Revisión de herramientas de software en uso</li>
-                <li>Identificación de cuellos de botella en la gestión</li>
+                <li>Análisis de procesos actuales</li>
+                <li>Identificación de áreas problemáticas</li>
+                <li>Evaluación del retorno sobre la inversión</li>
             </ul>
         </div>
 
         <div class="timeline-step">
-            <div class="step-number" style="border-color: #0077FF;">2</div>
+            <div class="step-number" style="border-color: #0056b3; background: #004494; color: white;">2</div>
             <span class="step-badge bg-blue-light text-blue">Fase 2</span>
-            <h3 class="step-title">Desarrollo e Integración</h3>
-            <p class="step-desc">Construcción de flujos automatizados. Se establecen conexiones de datos entre las plataformas actuales.</p>
+            <h3 class="step-title">Mapeo Completo</h3>
+            <p class="step-desc">Documentamos todos los flujos de trabajo e identificamos oportunidades de optimización y automatización.</p>
             <ul class="step-list">
-                <li>Configuración de escenarios de automatización</li>
-                <li>Pruebas en entorno controlado</li>
+                <li>Mapeo de todos los procesos empresariales</li>
+                <li>Identificación de cuellos de botella</li>
+                <li>Priorización de oportunidades</li>
             </ul>
         </div>
 
         <div class="timeline-step">
-            <div class="step-number" style="border-color: #00ff99;">3</div>
-            <span class="step-badge bg-green-light text-green">Fase 3</span>
-            <h3 class="step-title">Despliegue y Monitorización</h3>
-            <p class="step-desc">Activación del sistema en el entorno de producción. Mantenimiento y supervisión del rendimiento lógico.</p>
+            <div class="step-number" style="border-color: #0056b3; background: #004494; color: white;">3</div>
+            <span class="step-badge bg-blue-light text-blue">Fase 3</span>
+            <h3 class="step-title">Selección de Herramientas</h3>
+            <p class="step-desc">Te entregamos un roadmap detallado: qué automatizar, en qué orden y por qué, con las herramientas más adecuadas.</p>
             <ul class="step-list">
-                <li>Activación supervisada de procesos</li>
-                <li>Control de excepciones</li>
+                <li>Selección de herramientas adecuadas</li>
+                <li>Evaluación de compatibilidad</li>
+                <li>Plan de implementación priorizado</li>
+            </ul>
+        </div>
+
+        <div class="timeline-step">
+            <div class="step-number" style="border-color: #0056b3; background: #004494; color: white;">4</div>
+            <span class="step-badge bg-blue-light text-blue">Fase 4</span>
+            <h3 class="step-title">Implementación Gradual</h3>
+            <p class="step-desc">Automatizamos por fases, comenzando con proyectos piloto y midiendo resultados en cada etapa.</p>
+            <ul class="step-list">
+                <li>Implementación por fases</li>
+                <li>Proyectos piloto</li>
+                <li>Monitoreo continuo de resultados</li>
+            </ul>
+        </div>
+
+        <div class="timeline-step">
+            <div class="step-number" style="border-color: #0056b3; background: #004494; color: white;">5</div>
+            <span class="step-badge bg-blue-light text-blue">Fase 5</span>
+            <h3 class="step-title">Optimización Continua</h3>
+            <p class="step-desc">Monitoreamos y ajustamos constantemente para asegurar un ROI sostenido y mejora continua.</p>
+            <ul class="step-list">
+                <li>Monitoreo de métricas clave</li>
+                <li>Ajustes basados en resultados</li>
+                <li>Capacitación continua del equipo</li>
             </ul>
         </div>
 

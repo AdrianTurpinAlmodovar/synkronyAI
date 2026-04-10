@@ -1,3 +1,41 @@
+        @media screen and (max-width: 768px) {
+        /* Forzamos a que el contenido del header se apile verticalmente */
+        .header-content {
+            flex-direction: column !important;
+            height: auto !important;
+            padding: 15px 10px !important;
+            gap: 15px !important;
+        }
+
+        /* Ajustamos el tamaño del logo para que no ocupe demasiado */
+        .logo img {
+            height: 35px !important; 
+            margin-bottom: 5px;
+        }
+
+        /* Convertimos la lista de navegación en botones pequeños centrados */
+        .main-nav ul {
+            flex-direction: row !important; /* Mantenemos fila pero que envuelva */
+            flex-wrap: wrap;
+            justify-content: center !important;
+            gap: 8px !important;
+            padding: 0 !important;
+        }
+
+        .main-nav ul li a {
+            font-size: 13px !important;
+            padding: 5px 8px !important;
+        }
+
+        /* El widget de usuario (botón azul/perfil) también centrado */
+        .user-widget, .header-content .user-actions {
+            margin: 0 auto !important;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            }
+        }
+
 /* ======================================= */
 /* SECCIÓN DE SOLUCIONES BASE MEJORADA  */
 /* ======================================= */

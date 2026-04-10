@@ -58,9 +58,9 @@ a {
 
 hr {
     border: none;
-    border-top: 1px solid var(--card-border);
-    margin: 6rem auto;
-    width: 70%;
+    border-top: 3.5px solid rgba(128, 0, 255, 0.527);
+    margin: 5rem auto;
+    width: 75%;
 }
 
 /* ======================================= */
