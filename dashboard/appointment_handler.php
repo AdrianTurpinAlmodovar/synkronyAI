@@ -140,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div style='background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0;'>
                         <p style='margin: 5px 0;'><strong>📅 Fecha:</strong> " . date('d/m/Y', strtotime($date)) . "</p>
                         <p style='margin: 5px 0;'><strong>⏰ Hora:</strong> " . substr($time, 0, 5) . "h</p>
-                        <p style='margin: 5px 0;'><strong>📍 Enlace:</strong> Reunión Online</p>
+                        <p style='margin: 5px 0;'><strong>📍 Enlace:</strong>Recibirá un correo y un recordatorio horas antes de la reunion</p>
                     </div>
                     <p style='font-size: 0.9em; color: #666;'>Si necesitas cancelar, entra a tu panel de usuario.</p>
                     <hr style='border: none; border-top: 1px solid #eee;'>
