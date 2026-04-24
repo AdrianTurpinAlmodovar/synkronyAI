@@ -1,0 +1,12 @@
+# 1. Dar permisos de seguridad y apagar el autocompletado traicionero
+Options +FollowSymLinks -Indexes -MultiViews
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    RewriteRule ^soluciones/([a-zA-Z0-9-]+)/?$ soluciones/detail.php?slug=$1 [L,QSA]
+</IfModule>
