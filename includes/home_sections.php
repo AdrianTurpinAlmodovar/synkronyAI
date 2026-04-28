@@ -98,7 +98,7 @@ if (!function_exists('generateSlug')) {
 <!-- CASOS DE USO (BENTO GRID) -->
 <section class="rich-section padding-y-lg">
     <div class="section-header">
-        <h2>Reducción de tareas operativas</h2>
+        <h2>Reducción de tareas repetitivas</h2>
         <p>Implementación de sistemas para la gestión de datos, comunicación interna y atención al cliente.</p>
     </div>
 

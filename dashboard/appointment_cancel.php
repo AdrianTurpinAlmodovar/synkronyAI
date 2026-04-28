@@ -12,21 +12,29 @@ if (isset($_GET['id']) && isset($_GET['reason'])) {
     $reason = $conn->real_escape_string($_GET['reason']);
     $user_id = $_SESSION['user_id'];
 
-    // 1. Seguridad: Verificar que la cita pertenece a este usuario
-    $check_sql = "SELECT id FROM appointments WHERE id = ? AND user_id = ?";
+    // 1. Seguridad: Verificar que la cita pertenece a este usuario y extraer datos
+    $check_sql = "SELECT a.id, a.date, u.name 
+                  FROM appointments a 
+                  JOIN users u ON a.user_id = u.id 
+                  WHERE a.id = ? AND a.user_id = ?";
     $stmt = $conn->prepare($check_sql);
     $stmt->bind_param("ii", $id, $user_id);
     $stmt->execute();
+    $result = $stmt->get_result();
     
-    if ($stmt->get_result()->num_rows === 0) {
+    if ($result->num_rows === 0) {
         // Si intenta borrar la cita de otro, lo echamos
         header("Location: dashboard_normal.php?status=error&msg=unauthorized");
         exit;
     }
+    
+    // Almacenar los datos recuperados en variables
+    $row = $result->fetch_assoc();
+    $fecha_cita = $row['date'];
+    $nombre_cliente = $row['name'];
     $stmt->close();
 
     // 2. Actualizar estado a 'cancelled' y guardar motivo
-    // No borramos la fila (DELETE) para mantener el historial
     $update_sql = "UPDATE appointments SET status = 'cancelled', cancellation_reason = ? WHERE id = ?";
     $stmt = $conn->prepare($update_sql);
     $stmt->bind_param("si", $reason, $id);
@@ -37,13 +45,16 @@ if (isset($_GET['id']) && isset($_GET['reason'])) {
         // WEBHOOK MAESTRO A MAKE.COM - ACCIÓN CANCELAR
         // ============================================================
         
-        $master_webhook_url = 'WEEBHOK DE MAKE.COM';
+        $master_webhook_url = 'https://hook.eu1.make.com/r5gyxsson2oxskmqdqwlr0y6dso8a0rd';
         
         try {
-            // Construir payload para Make.com con acción "cancelar"
+            // Construir payload para Make.com incluyendo los nuevos parámetros
             $payload = [
                 'accion' => 'cancelar',
-                'id_cita' => $id
+                'id_cita' => $id,
+                'nombre_cliente' => $nombre_cliente,
+                'fecha' => $fecha_cita,
+                'motivo' => $reason
             ];
             
             // Enviar petición POST a Make.com

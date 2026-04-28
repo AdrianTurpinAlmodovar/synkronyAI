@@ -2,6 +2,8 @@
 require_once '../includes/db_config.php';
 $conn->set_charset("utf8mb4");
 session_start();
+$is_logged_in = isset($_SESSION['user_id']);
+$cta_link = $is_logged_in ? '/dashboard/dashboard_normal.php' : '/register.html';
 
 // 1. MOVER LA FUNCIÓN generateSlug ARRIBA (Debe existir antes de buscar)
 function generateSlug($title) {
@@ -160,7 +162,7 @@ function extractFeatures($description) {
                 <p class="hero-description"><?php echo htmlspecialchars($service['resumen']); ?></p>
 
                 <div class="hero-actions">
-                    <a href="/#agenda" class="cta-primary">Solicitar Demostración</a>
+                    <a href="<?php echo $cta_link; ?>" class="cta-primary">Solicitar Demostración</a>
                     <a href="/soluciones/" class="cta-secondary">← Ver más soluciones</a>
                 </div>
             </div>
@@ -284,7 +286,7 @@ function extractFeatures($description) {
                     <div class="sidebar-card cta-card">
                         <h3>¿Interesado en esta solución?</h3>
                         <p>Hablemos de cómo podemos transformar tu negocio con esta tecnología.</p>
-                        <a href="/#agenda" class="cta-primary full-width">Agendar Consulta</a>
+                        <a href="<?php echo $cta_link; ?>" class="cta-primary full-width">Agendar Consulta</a>
                     </div>
                     
                     <div class="sidebar-card">
@@ -317,7 +319,7 @@ function extractFeatures($description) {
                 <h2>¿Listo para transformar tu operación?</h2>
                 <p>Descubre cómo esta solución puede optimizar tus procesos y aumentar tu productividad.</p>
                 <div class="cta-actions">
-                    <a href="/#agenda" class="cta-primary">Solicitar Demostración</a>
+                    <a href="<?php echo $cta_link; ?>" class="cta-primary">Solicitar Demostración</a>
                 </div>
             </div>
         </div>

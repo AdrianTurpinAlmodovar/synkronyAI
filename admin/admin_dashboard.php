@@ -96,7 +96,7 @@ check_admin_access();
             </div>
             <div class="admin-card">
                 <div>
-                    <h3>🛠️ Servicios y Home</h3>
+                    <h3>🛠️ Servicios</h3>
                     <p>Edita el contenido público de la web.</p>
                 </div>
                 <a href="admin_services.php" class="btn-admin">Editar Servicios</a>
