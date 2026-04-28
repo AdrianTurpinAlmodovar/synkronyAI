@@ -206,7 +206,7 @@ Son las piezas de la interfaz que el usuario ve de forma constante mientras nave
 
 - **`footer.php` (Pie de Página):** Cierra todas las páginas del sitio. Muestra la información de contacto, los enlaces legales y las redes sociales. Técnicamente, incluye una función para actualizar el año del *Copyright* dinámicamente y está optimizado para buscadores (SEO) mediante datos estructurados.
 - **Sistema de Widgets (`user_widget.php` y `user_widget_soluciones.php`):** Son los menús de usuario situados en la barra de navegación superior. Tienen "inteligencia contextual": detectan si el usuario está conectado para mostrar su avatar y botones de salir/entrar. La versión `_soluciones` está diseñada específicamente para calcular bien las rutas de los enlaces cuando el usuario navega dentro de subcarpetas, garantizando que los enlaces nunca se rompan independientemente de dónde se encuentre el visitante.
-- **`modal_image_video.php` (Ventanas Multimedia):** Contiene la estructura HTML para reproducir vídeos de YouTube/Vimeo o ampliar imágenes sin salir de la página. Incluye opciones de accesibilidad (para navegar con el teclado), cierre al hacer clic fuera del recuadro y soporte para gestos táctiles en móviles.
+
 
 ### 2.5.3. Módulos de la Página Principal (Homepage)
 

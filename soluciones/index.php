@@ -84,9 +84,6 @@ $result_serv = $conn->query($sql_serv);
         </div>
     </div>
 </header>
-
-<?php include '../includes/modal_image_video.php'; ?>
-
 <main>
 
     <!-- SECCIÓN DE SOLUCIONES BASE MEJORADA -->

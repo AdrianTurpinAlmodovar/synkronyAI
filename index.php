@@ -17,32 +17,24 @@ $cta_link = $is_logged_in ? ($_SESSION['user_role'] === 'admin' ? 'admin/admin_d
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/video-modal.css">
     <link rel="stylesheet" href="assets/css/image-modal.css">
     <link rel="stylesheet" href="assets/css/demo-modal.css">
     <link rel="stylesheet" href="assets/css/hero-impact.css">
     <link rel="stylesheet" href="assets/css/agenda.css">
     <link rel="stylesheet" href="assets/css/home-features.css">
     <link rel="stylesheet" href="assets/css/solutions.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
 <?php include 'includes/user_widget.php'; ?>
-<?php include 'includes/modal_image_video.php'; ?>
 
 <main>
     <?php include 'includes/hero_home.php'; ?>
     <?php include 'includes/home_sections.php'; ?>
-
     <?php include 'includes/footer.php'; ?>
 </main>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script src="assets/js/scripts.js"></script>
 <script src="assets/js/home-features.js"></script>
