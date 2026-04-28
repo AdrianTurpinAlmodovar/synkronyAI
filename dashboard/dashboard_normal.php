@@ -49,6 +49,7 @@ while($row = $res_ocupadas->fetch_assoc()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - SynkronyAI</title>
+    <link rel="stylesheet" href="../assets/css/agenda.css"> 
     <link rel="stylesheet" href="../assets/css/styles.css"> 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
@@ -152,33 +153,68 @@ while($row = $res_ocupadas->fetch_assoc()) {
 </head>
 <body>
     <?php include '../includes/user_widget.php'; ?>
+    <?php if (isset($_GET['status'])): ?>
+    <script>
+        // 1. Capturamos los datos de la URL
+        const status = "<?php echo $_GET['status']; ?>";
+        const msg = "<?php echo $_GET['msg'] ?? ''; ?>";
+        
+        // 2. Mostramos la alerta correspondiente
+        if (status === 'success_appointment') {
+            Swal.fire({ title: '¡Reserva Confirmada!', text: 'Tu cita ha sido agendada con éxito.', icon: 'success', confirmButtonColor: '#9F40FF', background: '#14141d', color: '#fff' });
+        } else if (status === 'cancelled') {
+            Swal.fire({ title: 'Cita Cancelada', text: 'La sesión ha sido anulada.', icon: 'info', confirmButtonColor: '#0077FF', background: '#14141d', color: '#fff' });
+        } else if (status === 'error') {
+            let text = 'Ha ocurrido un error inesperado.';
+            if (msg === 'limit_reached') text = 'No puedes tener más de 4 citas activas.';
+            Swal.fire({ title: 'Error', text: text, icon: 'error', confirmButtonColor: '#FF6B6B', background: '#14141d', color: '#fff' });
+        }
 
+        // 3. LA CLAVE: Eliminamos los parámetros de la URL inmediatamente
+        // Esto hace que la URL pase de "...?status=success" a simplemente "dashboard_normal.php"
+        // Así, al pulsar F5, el parámetro ya no existe y la alerta no sale.
+        window.history.replaceState({}, document.title, window.location.pathname);
+    </script>
+    <?php endif; ?>
     <div class="dashboard-container">
         <div class="welcome-header">
             <div>
                 <h1 class="welcome-message">Hola, <?php echo $user_name; ?></h1>
-                <p style="color: #aaa; margin: 5px 0 0 0;">Gestiona tus sesiones de consultoría IA</p>
+                <p style="color: #aaa; margin: 5px 0 0 0;">Selecciona un día para ver las horas disponibles.</p>
             </div>
             <span class="role-badge"><?php echo $user_role; ?></span>
         </div>
 
         <div class="dashboard-grid">
             <!-- COLUMNA IZQUIERDA: AGENDAR -->
-            <div class="appointment-form-card">
-                <h3>📅 Agendar Sesión</h3>
-                <form action="appointment_handler.php" method="POST" id="appointmentForm">
-                    <div class="form-group">
-                        <label>1. Selecciona el día:</label>
-                        <input type="date" name="date" id="dateInput" required min="<?php echo date('Y-m-d'); ?>">
+            <div class="dashboard-card">
+                <div class="booking-widget">
+                    <div class="calendar-column">
+                        <div class="calendar-header">
+                            <button type="button" id="prev-month" onclick="changeMonth(-1)">&#8592;</button>
+                            <span id="current-month-display">Mes Año</span>
+                            <button type="button" id="next-month" onclick="changeMonth(1)">&#8594;</button>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+                        </div>
+                        <div class="calendar-days" id="calendar-days">
+                            </div>
                     </div>
-                    <div class="form-group">
-                        <label>2. Horas disponibles:</label>
-                        <select name="time" id="timeSelect" required disabled>
-                            <option value="">Primero selecciona una fecha...</option>
-                        </select>
-                        <small id="availabilityHint" style="color: #888; display: block; margin-top: 8px;"></small>
+
+                    <div class="time-column" id="time-column">
+                        <h4 id="selected-date-title">Horas disponibles</h4>
+                        <div class="time-slots" id="time-slots">
+                            </div>
+                        <button type="button" id="confirm-booking-btn" class="confirm-btn-premium" style="display: none;" onclick="submitBooking()">
+                            <span>Confirmar Reserva</span>
+                        </button>
                     </div>
-                    <button type="submit" class="btn-schedule" id="submitBtn" disabled>Confirmar Reserva Gratuita</button>
+                </div>
+
+                <form id="real-booking-form" action="appointment_handler.php" method="POST" style="display: none;">
+                    <input type="hidden" name="date" id="hidden-date" required>
+                    <input type="hidden" name="time" id="hidden-time" required>
                 </form>
             </div>
 
@@ -234,95 +270,27 @@ while($row = $res_ocupadas->fetch_assoc()) {
             <a href="../logout.php" style="color: #FF6B6B; font-size: 0.95rem; opacity: 0.8;">Cerrar Sesión</a>
         </div>
     </div>
-
-    <script>
-        const bookedSlots = <?php echo json_encode($bookedSlots); ?>;
-        const workHours = [ "09:00:00", "10:00:00", "11:00:00", "12:00:00", "15:00:00", "16:00:00", "17:00:00" ];
-
-        const dateInput = document.getElementById('dateInput');
-        const timeSelect = document.getElementById('timeSelect');
-        const submitBtn = document.getElementById('submitBtn');
-        const hint = document.getElementById('availabilityHint');
-
-        // LÓGICA DE HORAS DISPONIBLES
-        dateInput.addEventListener('change', function() {
-            const selectedDate = this.value;
-            timeSelect.innerHTML = '<option value="">-- Selecciona una hora --</option>';
-            
-            if(!selectedDate) {
-                timeSelect.disabled = true;
-                submitBtn.disabled = true;
-                return;
-            }
-
-            let count = 0;
-            workHours.forEach(hour => {
-                const slotId = `${selectedDate}|${hour}`;
-                if (!bookedSlots.includes(slotId)) {
-                    const opt = document.createElement('option');
-                    opt.value = hour;
-                    opt.textContent = hour.substring(0, 5);
-                    timeSelect.appendChild(opt);
-                    count++;
+    <?php
+        // Buscamos todas las citas confirmadas de hoy en adelante
+        $booked_slots = [];
+        $sql_booked = "SELECT date, time FROM appointments WHERE status = 'confirmed' AND date >= CURDATE()";
+        $res_booked = $conn->query($sql_booked);
+        if ($res_booked && $res_booked->num_rows > 0) {
+            while($row = $res_booked->fetch_assoc()) {
+                $d = $row['date'];
+                $t = substr($row['time'], 0, 5); // Nos quedamos con "HH:MM"
+                if(!isset($booked_slots[$d])) {
+                    $booked_slots[$d] = [];
                 }
-            });
-
-            if (count > 0) {
-                timeSelect.disabled = false;
-                submitBtn.disabled = false;
-                hint.textContent = `${count} horarios disponibles.`;
-                hint.style.color = "#00ff99";
-            } else {
-                timeSelect.disabled = true;
-                submitBtn.disabled = true;
-                hint.textContent = "Sin huecos libres para este día.";
-                hint.style.color = "#FF6B6B";
+                $booked_slots[$d][] = $t;
             }
-        });
-
-        // NOTIFICACIONES
-        const params = new URLSearchParams(window.location.search);
-        if (params.has('status')) {
-            const s = params.get('status');
-            const msg = params.get('msg');
-            
-            if (s === 'success_appointment') {
-                Swal.fire({ title: '¡Confirmado!', text: 'Tu cita ha sido registrada con éxito.', icon: 'success', confirmButtonColor: '#9F40FF', background: '#14141d', color: '#fff' });
-            } else if (s === 'cancelled') {
-                Swal.fire({ title: 'Cancelada', text: 'La cita ha sido cancelada correctamente.', icon: 'info', confirmButtonColor: '#9F40FF', background: '#14141d', color: '#fff' });
-            } else if (s === 'error' && msg === 'limit_reached') {
-                Swal.fire({ title: 'Límite alcanzado', text: 'No puedes tener más de 4 citas activas simultáneamente.', icon: 'warning', confirmButtonColor: '#FF6B6B', background: '#14141d', color: '#fff' });
-            }
-            window.history.replaceState({}, document.title, window.location.pathname);
         }
-
-        // LÓGICA DE CANCELACIÓN
-        function confirmCancel(id) {
-            Swal.fire({
-                title: 'Cancelar Cita',
-                text: "¿Por qué deseas cancelar esta sesión?",
-                input: 'text',
-                inputPlaceholder: 'Ej: Me ha surgido un imprevisto...',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#FF6B6B',
-                cancelButtonColor: '#333',
-                confirmButtonText: 'Confirmar Cancelación',
-                cancelButtonText: 'Volver',
-                background: '#14141d',
-                color: '#fff',
-                inputValidator: (value) => {
-                    if (!value) {
-                        return 'Por favor, escribe un motivo breve.'
-                    }
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const reason = encodeURIComponent(result.value);
-                    window.location.href = `appointment_cancel.php?id=${id}&reason=${reason}`;
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+        ?>
+        <script>
+            // Guardamos las citas en una variable global para que agenda.js pueda leerla
+            const bookedSlotsDB = <?php echo json_encode($booked_slots); ?>;
+        </script>
+        <script src="../assets/js/agenda.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </body>
+    </html>
