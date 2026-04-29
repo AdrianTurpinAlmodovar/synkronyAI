@@ -119,10 +119,22 @@ if (!function_exists('generateSlug')) {
                 </div>
                 <div class="bento-visual">
                     <div class="chat-sim">
-                        <div class="chat-msg left anim-msg-1">¿Tenéis disponibilidad hoy?</div>
+                        <div class="chat-msg left anim-msg-1">Buenas, ¿tenéis disponibilidad hoy?</div>
+                        
                         <div class="chat-reply-wrapper">
-                            <div class="chat-msg right typing anim-typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-                            <div class="chat-msg right resolved anim-msg-2">Sí, te reservo a las 17:00. 📅</div>
+                            <div class="chat-msg right typing anim-typing-1">
+                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                            </div>
+                            <div class="chat-msg right resolved anim-msg-2">Hoy no tenemos, pero mañana tenemos a las 16:00 y a las 19:00.</div>
+                        </div>
+
+                        <div class="chat-msg left anim-msg-3">Vale, pues dame mañana a las 16:00.</div>
+
+                        <div class="chat-reply-wrapper">
+                            <div class="chat-msg right typing anim-typing-2">
+                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                            </div>
+                            <div class="chat-msg right resolved anim-msg-4">Perfecto, queda anotado</div>
                         </div>
                     </div>
                 </div>
@@ -194,68 +206,52 @@ if (!function_exists('generateSlug')) {
 <!-- METODOLOGÍA -->
 <section class="rich-section padding-y-lg">
     <div class="section-header">
-        <h2 style="font-size: 2.5rem;">Metodología de Implementación</h2>
-        <p>Proceso estructurado para auditar e integrar soluciones tecnológicas.</p>
+        <h2 style="font-size: 2.5rem;">Metodología de Trabajo</h2>
+        <p>Nuestro proceso estructurado para garantizar automatizaciones exitosas desde el primer día.</p>
     </div>
     <div class="timeline-container">
 
         <div class="timeline-step">
-            <div class="step-number" style="border-color: #0056b3; background: #004494; color: white;">1</div>
+            <div class="step-number" style="border-color: #9F40FF; background: #0077FF; color: white;">1</div>
             <span class="step-badge bg-blue-light text-blue">Fase 1</span>
-            <h3 class="step-title">Evaluación de Necesidades</h3>
-            <p class="step-desc">Analizamos tus procesos actuales sin costo e identificamos las áreas donde la automatización puede tener más impacto.</p>
+            <h3 class="step-title">Auditoría de Procesos</h3>
+            <p class="step-desc">El primer paso es entender cómo funciona tu empresa. Nos sentamos contigo para analizar tu día a día, descubrir qué tareas manuales te hacen perder más tiempo y evaluar dónde la Inteligencia Artificial puede generar el mayor impacto económico.</p>
             <ul class="step-list">
-                <li>Análisis de procesos actuales</li>
-                <li>Identificación de áreas problemáticas</li>
-                <li>Evaluación del retorno sobre la inversión</li>
+                <li>Análisis detallado de cuellos de botella operativos.</li>
+                <li>Evaluación del Retorno de Inversión (ROI) esperado.</li>
             </ul>
         </div>
 
         <div class="timeline-step">
-            <div class="step-number" style="border-color: #0056b3; background: #004494; color: white;">2</div>
+            <div class="step-number" style="border-color: #9F40FF; background: #0077FF; color: white;">2</div>
             <span class="step-badge bg-blue-light text-blue">Fase 2</span>
-            <h3 class="step-title">Mapeo Completo</h3>
-            <p class="step-desc">Documentamos todos los flujos de trabajo e identificamos oportunidades de optimización y automatización.</p>
+            <h3 class="step-title">Diseño del Roadmap</h3>
+            <p class="step-desc">Una vez identificado el problema, trazamos la ruta de solución. Diseñamos una arquitectura técnica a medida y te entregamos un plan de acción claro: qué procesos vamos a automatizar, en qué orden exacto y qué herramientas de software utilizaremos para lograrlo.</p>
             <ul class="step-list">
-                <li>Mapeo de todos los procesos empresariales</li>
-                <li>Identificación de cuellos de botella</li>
-                <li>Priorización de oportunidades</li>
+                <li>Selección del stack tecnológico adecuado (Make, Groq, etc.).</li>
+                <li>Definición de un calendario de implantación estructurado.</li>
             </ul>
         </div>
 
         <div class="timeline-step">
-            <div class="step-number" style="border-color: #0056b3; background: #004494; color: white;">3</div>
+            <div class="step-number" style="border-color: #9F40FF; background: #0077FF; color: white;">3</div>
             <span class="step-badge bg-blue-light text-blue">Fase 3</span>
-            <h3 class="step-title">Selección de Herramientas</h3>
-            <p class="step-desc">Te entregamos un roadmap detallado: qué automatizar, en qué orden y por qué, con las herramientas más adecuadas.</p>
+            <h3 class="step-title">Automatización por Fases</h3>
+            <p class="step-desc">Pasamos a la acción desarrollando el código y las integraciones. No cambiamos toda tu empresa de golpe; implementamos las soluciones de forma gradual, empezando siempre con pruebas piloto en entornos seguros para garantizar que todo funciona sin interrumpir tu negocio.</p>
             <ul class="step-list">
-                <li>Selección de herramientas adecuadas</li>
-                <li>Evaluación de compatibilidad</li>
-                <li>Plan de implementación priorizado</li>
+                <li>Despliegue progresivo mediante proyectos piloto.</li>
+                <li>Conexión con las herramientas que ya utilizas (Gmail, Calendar).</li>
             </ul>
         </div>
 
         <div class="timeline-step">
-            <div class="step-number" style="border-color: #0056b3; background: #004494; color: white;">4</div>
+            <div class="step-number" style="border-color: #9F40FF; background: #0077FF; color: white;">4</div>
             <span class="step-badge bg-blue-light text-blue">Fase 4</span>
-            <h3 class="step-title">Implementación Gradual</h3>
-            <p class="step-desc">Automatizamos por fases, comenzando con proyectos piloto y midiendo resultados en cada etapa.</p>
+            <h3 class="step-title">Monitoreo y Mantenimiento</h3>
+            <p class="step-desc">La automatización no termina cuando se entrega el proyecto. Una vez que el sistema está en producción, nuestro equipo se encarga de vigilar su rendimiento diario, resolver cualquier incidencia en tiempo real y aplicar ajustes para asegurar que el sistema escale junto a tu empresa.</p>
             <ul class="step-list">
-                <li>Implementación por fases</li>
-                <li>Proyectos piloto</li>
-                <li>Monitoreo continuo de resultados</li>
-            </ul>
-        </div>
-
-        <div class="timeline-step">
-            <div class="step-number" style="border-color: #0056b3; background: #004494; color: white;">5</div>
-            <span class="step-badge bg-blue-light text-blue">Fase 5</span>
-            <h3 class="step-title">Optimización Continua</h3>
-            <p class="step-desc">Monitoreamos y ajustamos constantemente para asegurar un ROI sostenido y mejora continua.</p>
-            <ul class="step-list">
-                <li>Monitoreo de métricas clave</li>
-                <li>Ajustes basados en resultados</li>
-                <li>Capacitación continua del equipo</li>
+                <li>Soporte técnico proactivo y resolución de incidencias.</li>
+                <li>Optimización continua de flujos basados en datos reales.</li>
             </ul>
         </div>
 

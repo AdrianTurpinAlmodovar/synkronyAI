@@ -2,23 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // 1. Inicialización del Carrusel Continuo (Swiper)
-    if(typeof Swiper !== 'undefined') {
-        var swiper = new Swiper(".servicesSwiper", {
-            slidesPerView: 'auto',
-            spaceBetween: 30,
-            loop: true,
-            freeMode: true,
-            grabCursor: true,
-            speed: 7000,
-            autoplay: {
-                delay: 0,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-            }
-        });
-    }
-
     // 2. Efecto Spotlight (Mouse Tracker) para el Bento Grid
     const bentoCards = document.querySelectorAll('.bento-card');
     if (window.matchMedia("(pointer: fine)").matches) {
@@ -32,37 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.style.setProperty('--mouse-y', `${y}px`);
             });
         });
-    }
-
-    // 3. Calculadora de ROI (Lógica Matemática)
-    const hoursSlider = document.getElementById('hours-slider');
-    const rateSlider = document.getElementById('rate-slider');
-
-    const hoursVal = document.getElementById('hours-val');
-    const rateVal = document.getElementById('rate-val');
-    const costVal = document.getElementById('cost-val');
-    const savingsVal = document.getElementById('savings-val');
-
-    function calculateROI() {
-        if(!hoursSlider) return;
-
-        const hours = parseInt(hoursSlider.value);
-        const rate = parseInt(rateSlider.value);
-
-        hoursVal.textContent = hours;
-        rateVal.textContent = rate;
-
-        const annualCost = hours * 52 * rate;
-        const potentialSavings = annualCost * 0.80;
-
-        costVal.textContent = new Intl.NumberFormat('es-ES').format(annualCost);
-        savingsVal.textContent = new Intl.NumberFormat('es-ES').format(potentialSavings);
-    }
-
-    if(hoursSlider && rateSlider) {
-        hoursSlider.addEventListener('input', calculateROI);
-        rateSlider.addEventListener('input', calculateROI);
-        calculateROI();
     }
 
     // 4. Lógica del Acordeón para Preguntas Frecuentes (FAQ)

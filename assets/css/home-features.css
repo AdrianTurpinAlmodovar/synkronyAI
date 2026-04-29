@@ -44,20 +44,70 @@
 .chat-msg.left { background: #2a2a35; color: #fff; align-self: flex-start; border-bottom-left-radius: 4px; }
 .chat-msg.right { background: #00ff99; color: #000; font-weight: 500; border-bottom-right-radius: 4px; }
 .chat-msg.typing { display: flex; gap: 4px; align-items: center; justify-content: center; width: 60px; height: 42px; position: absolute; right: 0; }
-.chat-msg.resolved { position: absolute; right: 0; }
+.chat-msg.resolved { position: relative}
 .dot { width: 6px; height: 6px; background: #000; border-radius: 50%; animation: typingBounce 1.4s infinite ease-in-out both; }
 .dot:nth-child(1) { animation-delay: -0.32s; }
 .dot:nth-child(2) { animation-delay: -0.16s; }
 
-.anim-msg-1 { animation: seqMsg1 7s infinite; }
-.anim-typing { animation: seqTyping 7s infinite; }
-.anim-msg-2 { animation: seqMsg2 7s infinite; }
+/* ======================================= */
+/* SECUENCIA DE CHAT (4 MENSAJES)          */
+/* ======================================= */
 
-@keyframes typingBounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
-@keyframes seqMsg1 { 0%, 5% { opacity: 0; transform: translateY(10px); } 10%, 90% { opacity: 1; transform: translateY(0); } 95%, 100% { opacity: 0; transform: translateY(-10px); } }
-@keyframes seqTyping { 0%, 25% { opacity: 0; transform: translateY(10px); } 30%, 50% { opacity: 1; transform: translateY(0); } 55%, 100% { opacity: 0; transform: translateY(-10px); } }
-@keyframes seqMsg2 { 0%, 50% { opacity: 0; transform: translateY(10px); } 55%, 90% { opacity: 1; transform: translateY(0); } 95%, 100% { opacity: 0; transform: translateY(-10px); } }
+/* Asignamos una animación de 12 segundos en bucle continuo a cada elemento */
+.anim-msg-1 { animation: chatMsg1 12s infinite; }
+.anim-typing-1 { animation: chatTyping1 12s infinite; }
+.anim-msg-2 { animation: chatMsg2 12s infinite; }
+.anim-msg-3 { animation: chatMsg3 12s infinite; }
+.anim-typing-2 { animation: chatTyping2 12s infinite; }
+.anim-msg-4 { animation: chatMsg4 12s infinite; }
 
+/* Animación de los 3 puntitos (se aplica internamente a las bolitas) */
+@keyframes typingBounce { 
+    0%, 80%, 100% { transform: scale(0); } 
+    40% { transform: scale(1); } 
+}
+
+/* 1. Cliente pregunta (Aparece casi al instante) */
+@keyframes chatMsg1 {
+    0%, 3% { opacity: 0; transform: translateY(10px); }
+    6%, 91% { opacity: 1; transform: translateY(0); }
+    95%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* 2. Bot "Escribiendo..." 1 (Aparece y luego desaparece) */
+@keyframes chatTyping1 {
+    0%, 11% { opacity: 0; transform: translateY(10px); }
+    14%, 25% { opacity: 1; transform: translateY(0); }
+    28%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* 3. Bot responde a las horas (Aparece justo cuando desaparece el typing 1) */
+@keyframes chatMsg2 {
+    0%, 25% { opacity: 0; transform: translateY(10px); }
+    28%, 91% { opacity: 1; transform: translateY(0); }
+    95%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* 4. Cliente elige la hora (Espera un poco leyendo y responde) */
+@keyframes chatMsg3 {
+    0%, 40% { opacity: 0; transform: translateY(10px); }
+    43%, 91% { opacity: 1; transform: translateY(0); }
+    95%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* 5. Bot "Escribiendo..." 2 (Aparece para confirmar) */
+@keyframes chatTyping2 {
+    0%, 52% { opacity: 0; transform: translateY(10px); }
+    55%, 66% { opacity: 1; transform: translateY(0); }
+    69%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* 6. Bot confirma (Se queda hasta el final del bucle) */
+@keyframes chatMsg4 {
+    0%, 66% { opacity: 0; transform: translateY(10px); }
+    69%, 91% { opacity: 1; transform: translateY(0); }
+    95%, 100% { opacity: 0; transform: translateY(-10px); }
+}
 /* Animación Publicación Multicanal */
 .social-sim { display: flex; align-items: center; gap: 0; width: 100%; max-width: 280px; margin: 0 auto; }
 .s-source { width: 50px; height: 50px; background: #2a2a35; border: 1px solid #444; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; z-index: 2; position: relative; }
@@ -184,40 +234,6 @@
 @keyframes marqueeScroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
-}
-
-
-/* ======================================================= */
-/* CALCULADORA DE ROI                                      */
-/* ======================================================= */
-.roi-calculator {
-    display: flex;
-    gap: 40px;
-    background: #14141d;
-    border: 1px solid #333;
-    border-radius: 16px;
-    padding: 40px;
-}
-.roi-controls { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-.roi-input-group label { display: block; color: #aaa; font-size: 0.95rem; margin-bottom: 10px; }
-.roi-value-display { font-size: 1.8rem; font-weight: bold; color: #fff; margin-bottom: 15px; font-family: 'Poppins', sans-serif; }
-
-input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
-input[type=range]:focus { outline: none; }
-input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: #2a2a35; border-radius: 4px; }
-input[type=range]::-webkit-slider-thumb { height: 24px; width: 24px; border-radius: 50%; background: #9F40FF; cursor: pointer; -webkit-appearance: none; margin-top: -8px; box-shadow: 0 0 15px rgba(159, 64, 255, 0.5); transition: transform 0.1s; }
-input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
-
-.roi-slider-labels { display: flex; justify-content: space-between; color: #666; font-size: 0.8rem; margin-top: 8px; }
-.roi-results { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-.roi-card { background: #101017; border: 1px solid #333; border-radius: 12px; padding: 30px; text-align: center; }
-.roi-card.featured { border-color: rgba(0, 255, 153, 0.3); background: linear-gradient(180deg, rgba(0, 255, 153, 0.05) 0%, transparent 100%); position: relative; overflow: hidden; }
-.roi-label { color: #aaa; font-size: 0.95rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-.roi-number { font-size: 2.8rem; font-weight: bold; font-family: 'Poppins', sans-serif; margin-bottom: 5px; }
-.roi-subtext { color: #666; font-size: 0.85rem; }
-
-@media (max-width: 768px) {
-    .roi-calculator { flex-direction: column; padding: 25px; }
 }
 
 
