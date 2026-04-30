@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label>URL del Video Demo (YouTube/Vimeo)</label>
                 <input type="url" name="video_url" placeholder="https://www.youtube.com/embed/XXXXXX">
-                <small style="color: #666; display: block; margin-top: 5px;">Usa el enlace de "Insertar" (embed) para que funcione en el modal.</small>
+                <small style="color: #666; display: block; margin-top: 5px;">Usa el enlace de "Insertar" (embed) .</small>
             </div>
             
             <div class="form-group">

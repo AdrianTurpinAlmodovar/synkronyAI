@@ -6,18 +6,6 @@
 .section-header h2 { font-size: 2.2rem; font-family: 'Poppins', sans-serif; margin-bottom: 15px; }
 .section-header p { color: #aaa; font-size: 1.05rem; max-width: 700px; margin: 0 auto; line-height: 1.6; }
 
-/* --- CARRUSEL SWIPER --- */
-.services-carousel-wrapper { position: relative; width: 100%; max-width: 1400px; margin: 0 auto; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); }
-.servicesSwiper { width: 100%; padding: 20px 0; }
-.servicesSwiper .swiper-wrapper { transition-timing-function: linear !important; align-items: stretch; }
-.swiper-slide { width: 350px; height: auto; display: flex; flex-shrink: 0; }
-.swiper-slide .card { width: 100%; display: flex; flex-direction: column; background: #14141d; border: 1px solid #333; transition: border-color 0.3s, transform 0.3s; }
-.swiper-slide .card:hover { border-color: #9F40FF; transform: translateY(-5px); }
-
-.drag-indicator { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 30px; color: #666; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; animation: pulse-opacity 2s infinite; }
-.drag-indicator svg { width: 20px; height: 20px; stroke: #9F40FF; }
-@keyframes pulse-opacity { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-
 /* ======================================================= */
 /* BENTO GRID INTERACTIVO Y MICRO-ANIMACIONES              */
 /* ======================================================= */

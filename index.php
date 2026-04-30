@@ -17,8 +17,6 @@ $cta_link = $is_logged_in ? ($_SESSION['user_role'] === 'admin' ? 'admin/admin_d
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/image-modal.css">
-    <link rel="stylesheet" href="assets/css/demo-modal.css">
     <link rel="stylesheet" href="assets/css/hero-impact.css">
     <link rel="stylesheet" href="assets/css/agenda.css">
     <link rel="stylesheet" href="assets/css/home-features.css">
